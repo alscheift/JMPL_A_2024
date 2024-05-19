@@ -17,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'userownpost' => UserOwnPost::class,
             'admin' => AdminOnly::class
         ]);
+        $middleware->validateCsrfTokens(except: [
+            'unsafe/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

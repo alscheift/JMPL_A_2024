@@ -4,7 +4,6 @@
             <h1 class="text-center font-bold text-xl">Login !</h1>
 
             <form method="POST" action="{{ route('unsafe.login') }}" class="mt-10">
-                @csrf
 
                 <x-form.input labelname="Email or Username" name="email" type="input"
                               autocomplete="username"></x-form.input>
