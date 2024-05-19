@@ -49,13 +49,8 @@ class RegisterController extends Controller
             bcrypt($attributes['password'])
         ]);
         
-        // get user for login
-        $user = DB::select("SELECT * FROM users WHERE email = ? OR username = ? LIMIT 1", [
-            $attributes['email'],
-            $attributes['username']
-        ]);
-
-        auth()->login($user[0]);
+        $user = User::where('email', $attributes['email'])->first();
+        auth()->login($user);
         return redirect('/')->with('success', 'Your account has been created.');
     }
 }
