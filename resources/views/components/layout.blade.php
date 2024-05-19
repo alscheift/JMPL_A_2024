@@ -1,6 +1,6 @@
 <!doctype html>
 
-<title>Laravel From Scratch Blog</title>
+<title>{{ config('app.name') }}</title>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
         <div>
             <a href="/">
                 <h1 class="text-xl font-bold text-black-900">
-                    <span class="text-blue-400">PPW</span> - Laravel
+                    <span class="text-blue-400">{{ config('app.app_first_name') }}</span> {{ '- '.config('app.app_last_name') }}
                 </h1>
             </a>
         </div>

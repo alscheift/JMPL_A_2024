@@ -14,6 +14,9 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    // Change this to 'Simple Blog' for the app name
+    'app_first_name' => env('APP_NAME_FIRST', 'Altair'),
+    'app_last_name' => env('APP_NAME_LAST', 'Blog'),
 
     /*
     |--------------------------------------------------------------------------
