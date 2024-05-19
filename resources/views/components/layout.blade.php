@@ -68,9 +68,9 @@
 
             @else
                 <div class="space-x-3">
-                    <a href="/register"
+                    <a href="register"
                        class="text-white ml-3 text-xs font-bold bg-gray-500 uppercase hover:bg-gray-600 px-6 py-2 rounded-2xl transition ease-in-out duration-150">Register</a>
-                    <a href="/login"
+                    <a href="login"
                        class="text-white ml-3 text-xs font-bold bg-blue-500 uppercase hover:bg-blue-600 px-6 py-2 rounded-2xl transition ease-in-out duration-150">Log
                         In</a>
                 </div>

@@ -10,6 +10,9 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\Unsafe\RegisterController as UnsafeRegisterController;
+use App\Http\Controllers\Auth\Unsafe\SessionsController as UnsafeSessionsController;
+
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -57,3 +60,26 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
+
+
+// unsafe login
+// Register & Login
+// make one with prefix of admin
+
+// group prefix
+// Route::prefix('admin')->group(function () {
+//     Route::get('dashboard', function () {
+//         return view('admin.dashboard');
+//     });
+Route::group(['prefix' => 'unsafe', 'as' => 'unsafe.'], function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('register', [UnsafeRegisterController::class, 'create'])->name('register');
+        Route::post('register', [UnsafeRegisterController::class, 'store'])->name('register');
+    
+        Route::get('login', [UnsafeSessionsController::class, 'create'])->name('login');
+        Route::post('login', [UnsafeSessionsController::class, 'store'])->name('login');
+    });
+    Route::post('logout', [UnsafeSessionsController::class, 'destroy'])->middleware('auth')->name('logout');
+});
+
+
