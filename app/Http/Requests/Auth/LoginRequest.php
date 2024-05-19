@@ -40,8 +40,6 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-
-        // auth use email as username
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember')) && 
             ! Auth::attempt([
             'username' => $this->email,
@@ -49,6 +47,7 @@ class LoginRequest extends FormRequest
         ])) {
             RateLimiter::hit($this->throttleKey());
 
+            // auth use email as username
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
