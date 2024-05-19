@@ -17,11 +17,16 @@ class AdminOnly
     public function handle(Request $request, Closure $next): Response
     {
         // if not admin
-        if (!auth()->user()->can('admin')) {
-
-            abort(403);
+        if (!self::is_admin()) {
+            // redirect with 403 status code
+            $request->redirect()->back()->with('error', 'You are not authorized to access this page')->setStatusCode(403);
         }
 
         return $next($request);
+    }
+// static is_admin method
+    public static function is_admin(): bool
+    {
+        return Auth::user()?->is_admin === 1;
     }
 }

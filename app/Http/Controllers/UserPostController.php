@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class UserPostController extends Controller
 {
@@ -45,7 +46,7 @@ class UserPostController extends Controller
         $attributes = $this->validatePost();
 
         if (request()->file('thumbnail')) {
-            $attributes['thumbnail'] = request()->file('thumbnail')?->store('thumbnails');
+            $attributes['thumbnail'] = Storage::put('public/thumbnails', request()->file('thumbnail'));
         }
 
         $attributes['user_id'] = auth()->id();

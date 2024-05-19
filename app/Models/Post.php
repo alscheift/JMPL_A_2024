@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @method orderBy(mixed $column, string $string)
@@ -50,11 +51,11 @@ class Post extends Model
 
     public function getImagePath(): string
     {
-        $defaultUrl = 'https://picsum.photos/seed/' . $this->id . '/1100/860';
-        $thumbnailUrl = 'storage/' . $this->thumbnail;
+        $thumbnailUrl = Storage::url($this->thumbnail);
 
         if ($this->thumbnail && file_exists(public_path($thumbnailUrl)))
             return asset($thumbnailUrl);
+        $defaultUrl = 'https://picsum.photos/seed/' . $this->id . '/1100/860';
         return $defaultUrl;
     }
 

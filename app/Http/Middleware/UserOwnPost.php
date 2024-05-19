@@ -15,10 +15,15 @@ class UserOwnPost
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->can('userownpost', $request->post))
+        if (self::is_my_post($request->user(), $request->post))
             return $next($request);
         else
-            return redirect()->back();
+            return redirect()->back()->with('error', 'You are not authorized to edit this post')->setStatusCode(403);
 
+    }
+
+    public static function is_my_post($user, $post): bool
+    {
+        return $user->id == $post->user_id;
     }
 }

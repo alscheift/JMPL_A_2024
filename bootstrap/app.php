@@ -14,10 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
+            'userownpost' => UserOwnPost::class,
             'admin' => AdminOnly::class
-        ]);
-        $middleware->alias([
-            'userownpost' => UserOwnPost::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
