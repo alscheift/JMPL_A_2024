@@ -54,9 +54,8 @@ class SessionsController extends Controller
         // login input: ' OR '1'='1
         // resulting query: SELECT * FROM users WHERE email = '' OR '1'='1' OR username = '' OR '1'='1' LIMIT 1
         if (!$user || !password_verify(request('password'), $user[0]->password)) {
-            throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified. Please try again.'
-            ]);
+            // error status code
+            return redirect()->back()->with('error', 'Salah woi')->setStatusCode(401);
         }else {
             // login success
             auth()->loginUsingId($user[0]->id);
@@ -65,7 +64,7 @@ class SessionsController extends Controller
 
 
         session()->regenerate();
-        return redirect('/')->with('success', 'Welcome Back!');
+        return redirect('/')->with('success', 'Welcome Back!')->setStatusCode(302);
     }
 
     public function destroy(): RedirectResponse
