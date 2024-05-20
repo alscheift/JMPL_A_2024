@@ -1,0 +1,23 @@
+POST /unsafe/login HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Length: 25
+Cache-Control: max-age=0
+sec-ch-ua: "Not-A.Brand";v="99", "Chromium";v="124"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+Origin: http://127.0.0.1:8000
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.118 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:8000/unsafe/login
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: XSRF-TOKEN=eyJpdiI6InRHOVpyTEJHNHJCRk9qZUQvZmlQZ2c9PSIsInZhbHVlIjoiL055WUtLeU8zamNkUXI1dXUvUDNkakF4QzhLZmhDeXBKVzVWNjJLcVdOUTBKbUt0dVBwbVdUQzUvZkJCeFFtUHhjV0tBYmhSaHJEdldHbTdxcGRuNDJSL1BzUWVDVXVHUVV3Ujl6RkJ1cHpVb0NHcjVoWDl3MTZWZ3VoMTFTMWIiLCJtYWMiOiJlNzMyN2NkNjA2NWZjYzVmOGE1NDgwYmYzMmMzOGEzZTFkODhhZjI4OWZlYzM4NDY1ZjI3ZTUzNmE5NjJlZWE3IiwidGFnIjoiIn0%3D; jmpl_a_2024_session=eyJpdiI6IkxodEFRQ255QzBqNURUK09yclZHUmc9PSIsInZhbHVlIjoiZmlJRXE1RkE4Vzl4dmU2Y2Rld2g4ZFlzUVRpN2RENnpvbU00WG1QTUNhZFRHMlJxYXhXVHVQZm94V0pLK3QxMWZsYk01ZDU5R1ZrTEVlb0NxZDlNV2VtNEorZkoxWVlINmRMYWduOWJ2V2F5d2hnbGZJcDJ1VkNhVHNuWFprYXIiLCJtYWMiOiJmNDBkMzM2OTFhOWE5MmU4MWU4MjBiZDRiOWE2MmY4ZmMwM2MyZDc3ZTczMmY5YTY0NjdmMGJkZDZiYmU1YWY2IiwidGFnIjoiIn0%3D
+Connection: close
+
+email=hello&password=pass

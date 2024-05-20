@@ -1,0 +1,3 @@
+**/dump/**/*.csv*
+log
+target.txt
