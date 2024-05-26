@@ -10,8 +10,22 @@
                               autocomplete="username"></x-form.input>
                 <x-form.input name="password" type="password" autocomplete="new-password"></x-form.input>
 
+                <div id="recaptcha-container" class="g-recaptcha mt-2 mb-2"></div>
+                <x-form.error name="g-recaptcha-response"></x-form.error>
                 <x-form.button>Login</x-form.button>
             </form>
         </main>
+        <script>
+            var onloadCallback = function() {
+            grecaptcha.render('recaptcha-container', {
+                'sitekey' : '{{ config('recaptcha.site_key') }}',
+                'callback' : function(response) {
+                    // console.log(response+' is verified');
+                    document.querySelector('#g-recaptcha-response').value = response;
+                }
+            });
+            
+        };
+        </script>
     </section>
 </x-layout>
