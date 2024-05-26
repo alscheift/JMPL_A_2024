@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RecaptchaController;
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\UserOwnPost;
 use Illuminate\Foundation\Application;
@@ -15,7 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'userownpost' => UserOwnPost::class,
-            'admin' => AdminOnly::class
+            'admin' => AdminOnly::class,
+            'verify.recaptcha' => RecaptchaController::class,
         ]);
         $middleware->validateCsrfTokens(except: [
             'unsafe/*',
