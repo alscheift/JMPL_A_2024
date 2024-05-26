@@ -30,14 +30,14 @@ class LoginAttempts extends Model
     public function increaseLoginAttempts(): void
     {
         $this->attempts++;
-        $this->last_attempt_at = now();
+        $this->updated_at = now();
         $this->save();
     }
 
     public function resetLoginAttempts(): void
     {
         $this->attempts = 0;
-        $this->last_attempt_at = now();
+        $this->updated_at = now();
         $this->save();
     }
 }
