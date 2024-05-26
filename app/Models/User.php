@@ -69,10 +69,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(LoginAttempts::class);
     }
-
-    // login attempt counter
-    public function loginAttempts(): int
-    {
-        return optional($this->loginAttempt)->attempts ?? 0;
-    }
 }
