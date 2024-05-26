@@ -44,6 +44,10 @@ class RecaptchaController extends Controller
 
     public function handle(Request $request, Closure $next)
     {
+        if (!config('recaptcha.enabled')) {
+            return $next($request);
+        }
+        
         if(!session('captcha')){
             if($this->max_login_attempts_exceeded($request)){
                 redirect()->back()->withErrors(['g-recaptcha-response' => 'Please verify that you are not a robot.'])->withInput();
