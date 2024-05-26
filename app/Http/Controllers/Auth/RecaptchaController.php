@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use Closure;
 use App\Http\Controllers\Controller;
+use App\Models\LoginAttempts;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -11,9 +13,45 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RecaptchaController extends Controller
 {
+    // function to check user login attempts
+    public function max_login_attempts_exceeded(Request $request)
+    {
+        $ip_address = $request->ip();
+        $user = User::where('email', $request->email)->orWhere('username', $request->email)->first();
+        if (!$user) {
+            return false;
+        }
+
+        $login_attempts = LoginAttempts::where('user_id', $user->id)->first();
+
+        if ($login_attempts) {
+            $login_attempts->increment('attempts');
+        } else {
+            LoginAttempts::create([
+                'ip_address' => $ip_address,
+                'user_id' => $user->id,
+                'attempts' => 1,
+            ]);
+        }
+
+        if ($login_attempts && $login_attempts->attempts >= config('recaptcha.max_attempts')) {
+            // session set captcha enable
+            session(['captcha' => true]);
+            return true;
+        }
+        return false;
+    }
 
     public function handle(Request $request, Closure $next)
     {
+        if(!session('captcha')){
+            if($this->max_login_attempts_exceeded($request)){
+                redirect()->back()->withErrors(['g-recaptcha-response' => 'Please verify that you are not a robot.'])->withInput();
+            } else {
+                return $next($request);
+            }
+        }
+        
         $recaptcha_verify_url = 'https://www.google.com/recaptcha/api/siteverify';
         $validator = Validator::make($request->all(), [
             'g-recaptcha-response' => 'required',

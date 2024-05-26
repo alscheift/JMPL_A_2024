@@ -17,6 +17,7 @@
         </main>
         <script>
             var onloadCallback = function() {
+                @if(session('captcha'))
             grecaptcha.render('recaptcha-container', {
                 'sitekey' : '{{ config('recaptcha.site_key') }}',
                 'callback' : function(response) {
@@ -24,6 +25,9 @@
                     document.querySelector('#g-recaptcha-response').value = response;
                 }
             });
+            @else
+            console.log('no captcha needed :D');
+            @endif
             
         };
         </script>

@@ -25,7 +25,8 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
+        // reset login attempts
+        auth()->user()->loginAttempt->resetLoginAttempts();
         $request->session()->regenerate();
 
         return redirect()->intended(route('home', absolute: false));
