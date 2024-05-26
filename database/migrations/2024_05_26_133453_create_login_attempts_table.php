@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('login_attempts', function (Blueprint $table) {
             $table->id();
+            $table->string('ip_address');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->integer('attempts')->default(0);
             $table->timestamps();
         });
     }
