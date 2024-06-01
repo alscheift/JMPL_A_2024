@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use App\Http\Controllers\Controller;
 
-class PostController extends Controller
+class HomeController extends Controller
 {
     public function index(): View
     {

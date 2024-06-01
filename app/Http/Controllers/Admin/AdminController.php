@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
-class AdminPageController extends Controller
+class AdminController extends Controller
 {
     public function index(): View|RedirectResponse
     {

@@ -1,20 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminPageController;
-use App\Http\Controllers\PostCommentsController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\UserPostController;
-use App\Http\Controllers\PostController;
-use Illuminate\Validation\ValidationException;
-use App\Models\User;
-use MailchimpMarketing\ApiClient;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Home\HomeController; 
+use App\Http\Controllers\Admin\AdminController;
 
-Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('/authors/{user}', [UserPostController::class, 'show'])->name('user.posts.show');
-Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+use App\Http\Controllers\Post\PostController;
+use App\Http\Controllers\Post\CommentController as PostCommentController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/authors/{user}', [PostController::class, 'show'])->name('user.posts.show');
+Route::get('/posts/{post:slug}', [HomeController::class, 'show'])->name('posts.show');
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -32,29 +28,24 @@ Route::middleware('auth')->group(function () {
 
 // User section
 Route::middleware('auth')->group(function () {
+    Route::post('/posts/{post:slug}/comments', [PostCommentController::class, 'store']);
 
-    Route::post('/posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
-    Route::get('user/posts', [UserPostController::class, 'index'])->name('user.posts.index');
-    Route::post('user/posts', [UserPostController::class, 'store'])->name('user.posts.store');
-    Route::get('user/posts/create', [UserPostController::class, 'create'])->name('user.posts.create');
-
-    Route::get('user/posts/{post}/edit', [UserPostController::class, 'edit'])->name('user.posts.edit');
-    Route::patch('user/posts/{post}', [UserPostController::class, 'update'])->name('user.posts.update');
-    Route::delete('user/posts/{post}', [UserPostController::class, 'destroy'])->name('user.posts.destroy');
-
+    Route::group(['prefix' => 'user', 'as'=>'user.posts.'], function () {
+        Route::resource('posts', PostController::class);
+    });
 });
 
 // Admin Section
 Route::middleware('admin')->group(function () {
-    Route::get('admin', [AdminPageController::class, 'index'])->name('admin.index.posts');
-    Route::get('admin/posts', [AdminPageController::class, 'index'])->name('admin.index.posts');
-    Route::get('admin/users', [AdminPageController::class, 'index'])->name('admin.index.users');
-    Route::get('admin/comments', [AdminPageController::class, 'index'])->name('admin.index.comments');
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.index.posts');
+    Route::get('admin/posts', [AdminController::class, 'index'])->name('admin.index.posts');
+    Route::get('admin/users', [AdminController::class, 'index'])->name('admin.index.users');
+    Route::get('admin/comments', [AdminController::class, 'index'])->name('admin.index.comments');
 
     // Delete post, user, comment
-    Route::delete('admin/posts/{post}', [AdminPageController::class, 'destroy'])->name('admin.posts.destroy');
-    Route::delete('admin/users/{user}', [AdminPageController::class, 'destroy'])->name('admin.users.destroy');
-    Route::delete('admin/comments/{comment}', [AdminPageController::class, 'destroy'])->name('admin.comments.destroy');
+    Route::delete('admin/posts/{post}', [AdminController::class, 'destroy'])->name('admin.posts.destroy');
+    Route::delete('admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
+    Route::delete('admin/comments/{comment}', [AdminController::class, 'destroy'])->name('admin.comments.destroy');
 
 });
 

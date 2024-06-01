@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Post;
 
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
-class UserPostController extends Controller
+class PostController extends Controller
 {
     public function show(User $user): View
     {
