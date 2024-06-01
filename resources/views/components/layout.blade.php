@@ -54,6 +54,12 @@
                     </x-dropdown-item>
 
                     <x-dropdown-item
+                        href="{{route('profile.edit')}}"
+                        :active="request()->is(route('profile.edit'))"
+                    >Profile
+                    </x-dropdown-item>
+
+                    <x-dropdown-item
                         href="/user/posts/create"
                         :active="request()->is('/user/posts/create')"
                     >New Post
