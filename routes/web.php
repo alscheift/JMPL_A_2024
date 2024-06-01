@@ -63,3 +63,5 @@ Route::middleware('admin')->group(function () {
 
 
 require __DIR__.'/auth.php';
+require __DIR__.'/breeze/web.php';
+require __DIR__.'/unsafe/web.php';

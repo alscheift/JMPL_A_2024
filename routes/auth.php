@@ -58,5 +58,4 @@ Route::middleware('auth')->group(function () {
                 ->name('logout');
 });
 
-require __DIR__.'/breeze/auth.php';
 require __DIR__.'/unsafe/auth.php';
