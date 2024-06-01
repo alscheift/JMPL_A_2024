@@ -54,8 +54,12 @@ class SessionsController extends Controller
         // login input: ' OR '1'='1
         // resulting query: SELECT * FROM users WHERE email = '' OR '1'='1' OR username = '' OR '1'='1' LIMIT 1
         if (!$user || !password_verify(request('password'), $user[0]->password)) {
-            // error status code
-            return redirect()->back()->with('error', 'Salah woi')->setStatusCode(401);
+            session()->flash('error', 'Salah woi');
+            throw ValidationException::withMessages([
+                'email' => 'Your provided credentials could not be verified. Please try again.',
+            ]);
+            // return redirect()->back()->with('error', 'Salah woi')->setStatusCode(401); // sql map won't work because of the redirect
+
         }else {
             // login success
             auth()->loginUsingId($user[0]->id);
