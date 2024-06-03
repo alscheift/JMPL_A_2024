@@ -6,8 +6,8 @@
         </h1>
 
             <main class="flex flex-col">
-               @livewire('profile.user-identity')
-               @livewire('profile.password') 
+               @include('profile.partials.user-identity')
+               @include('profile.partials.password')
             </main>
         </div>
     </section>
