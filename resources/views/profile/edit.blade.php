@@ -6,6 +6,7 @@
         </h1>
 
             <main class="flex flex-col">
+               @include('profile.partials.two-factor-authentication')
                @include('profile.partials.user-identity')
                @include('profile.partials.changepassword')
             </main>
