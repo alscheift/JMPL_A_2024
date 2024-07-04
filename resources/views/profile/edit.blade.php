@@ -7,7 +7,7 @@
 
             <main class="flex flex-col">
                @include('profile.partials.user-identity')
-               @include('profile.partials.password')
+               @include('profile.partials.changepassword')
             </main>
         </div>
     </section>
