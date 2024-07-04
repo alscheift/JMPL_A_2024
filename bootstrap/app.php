@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RecaptchaController;
 use App\Http\Middleware\AdminOnly;
+use App\Http\Middleware\RedirectIfTwoAuthenticatable;
 use App\Http\Middleware\UserOwnPost;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'userownpost' => UserOwnPost::class,
             'admin' => AdminOnly::class,
             'verify.recaptcha' => RecaptchaController::class,
+            '2fa' => RedirectIfTwoAuthenticatable::class,
         ]);
         $middleware->validateCsrfTokens(except: [
             'unsafe/*',

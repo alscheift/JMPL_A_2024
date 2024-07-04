@@ -21,7 +21,10 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('verify.recaptcha');
+    Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware(['verify.recaptcha', '2fa']);
+
+    Route::get('2fa/verify', [TwoFactor::class, 'showTwoFactorForm'])->name('2fa.verify.form');
+    Route::post('2fa/verify', [TwoFactor::class, 'verifyTwoFactor'])->name('2fa.verify');
 
     // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
     //             ->name('password.request');
