@@ -75,7 +75,7 @@ class PostController extends Controller
         $attributes = $this->validatePost($post);
 
         if ($attributes['thumbnail'] ?? false) {
-            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+            $attributes['thumbnail'] = Storage::put('public/thumbnails', request()->file('thumbnail'));
         }
 
         $post->update($attributes);
