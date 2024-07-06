@@ -3,7 +3,7 @@
     <article class="flex space-x-4">
         @isset($comment?->author)
             <div class="flex-shrink-0">
-                <img src="https://i.pravatar.cc/60?u={{$comment->author->id}}" alt="" width="60" height="60"
+                <img src="https://ui-avatars.com/api/?name={{auth()->user()->name??'Unknown'}}&background=0D8ABC&color=fff" alt="" width="60" height="60"
                      class="rounded-xl">
             </div>
 

@@ -3,7 +3,7 @@
     <form method="POST" action="/posts/{{$post->slug}}/comments">
         @csrf
         <header class="flex items-center">
-            <img src="https://ui-avatars.com/api/?name={{$post->author->name??'Unknown'}}&background=0D8ABC&color=fff" alt="" width="40" height="40" class="rounded-full">
+            <img src="https://ui-avatars.com/api/?name={{auth()->user()->name??'Unknown'}}&background=0D8ABC&color=fff" alt="" width="40" height="40" class="rounded-full">
             <h2 class="ml-4">Want to participate?</h2>
         </header>
 
