@@ -14,7 +14,7 @@
 
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         @isset($post->author)
-                            <img src="https://i.pravatar.cc/60?u={{$post->author->id}}" alt="User Avatar"
+                            <img src="https://ui-avatars.com/api/?name={{$post->author->name??'Unknown'}}&background=0D8ABC&color=fff" alt="User Avatar"
                                  class="rounded-xl">
                         @endisset
                         <div class="ml-3 text-left">

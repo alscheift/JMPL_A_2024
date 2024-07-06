@@ -1,7 +1,7 @@
 @props(['post'])
 <div class="flex items-center text-sm">
     @isset($post->author)
-        <img src="https://i.pravatar.cc/60?u={{$post->author->id}}" class="rounded-xl" alt="User Avatar">
+        <img src="https://ui-avatars.com/api/?name={{$post->author->name??'Unknown'}}&background=0D8ABC&color=fff" class="rounded-xl" alt="User Avatar">
     @endisset
     <div class="ml-3">
         <h5 class="font-bold">
